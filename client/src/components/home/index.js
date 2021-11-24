@@ -33,20 +33,23 @@ const Home = () => {
         CARROUSEL
       </div>
       <Grid container spacing={2} className="article_card">
-        <Grid key ={1} item xs={12} s={6} lg={3}>
-          <ArticleCard />
-        </Grid>
-        <Grid key ={1} item xs={12} s={6} lg={3}>
-          <ArticleCard />
-        </Grid>
-        <Grid key ={1} item xs={12} s={6} lg={3}>
-          <ArticleCard />
-        </Grid>
-        <Grid key ={1} item xs={12} s={6} lg={3}>
-          <ArticleCard />
-        </Grid>
+        { articles && articles.articles ?
+            articles.articles.map((item) => (
+            <Grid key={item._id} item xs={12} s={6} lg={3}>
+              <ArticleCard key={item._id} article={item} />
+            </Grid>
+            ))
+          :null
+        }
       </Grid> 
-
+      <button
+        onClick={()=>{
+          let skip = sort.skip + sort.limit;
+          dispatch(getArticles({...sort,skip:skip}));
+          setSort({skip:skip})
+        }}
+      >
+        Load More</button>
     </div>
   )
 }
