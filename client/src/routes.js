@@ -4,7 +4,8 @@ import GoogleFontLoader from 'react-google-font-loader';
 
 import Home from './components/home/index';
 import Header from './components/navigation/header';
-import MainLayout from './hoc/mainLayout'
+import MainLayout from './hoc/mainLayout';
+import Auth from './components/auth';
 
 const Routes = () => {
   
@@ -13,6 +14,7 @@ const Routes = () => {
       <Header />
       <MainLayout>
         <Switch>
+          <Route path="/auth" component={Auth}/>
           <Route path="/" component={Home}/>
         </Switch>
       </MainLayout>
