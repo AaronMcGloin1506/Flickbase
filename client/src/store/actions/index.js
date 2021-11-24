@@ -1,7 +1,8 @@
 import {
     GET_ARTICLES,
     ERROR_GLOBAL,
-    SUCCESS_GLOBAL
+    SUCCESS_GLOBAL,
+    CLEAR_NOTIFICATION
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -21,3 +22,11 @@ export const successGlobal = (msg) => ({
     type: SUCCESS_GLOBAL,
     payload: msg
 })
+
+export const clearNotifications = () => {
+    return (dispatch) => {
+        dispatch({
+            type: CLEAR_NOTIFICATION         
+        })
+    }
+}
