@@ -18,7 +18,7 @@ export const getArticles = (sort) => {
             dispatch(articles.getArticles(newArts))
 
         } catch(error){
-            
+            dispatch(articles.errorGlobal('Opps error loading artices'))
         }
     }
 }
