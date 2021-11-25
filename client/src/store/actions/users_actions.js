@@ -20,3 +20,20 @@ export const registerUser = (values) => {
         }
     }
 }
+
+export const signinUser = (values) => {
+    return async(dispatch)=> {
+        try{
+            const user = await axios.post(`/api/users/signin`,{
+                email: values.email,
+                password: values.password
+            });
+            dispatch(users.authUser({data:user.data, auth:true}))
+            dispatch(users.successGlobal('Welcome back!!'))
+        }
+        catch(error){
+            console.log(error.response.data.message)
+            dispatch(users.errorGlobal('Opps error signing in user'))
+        }
+    }
+}
