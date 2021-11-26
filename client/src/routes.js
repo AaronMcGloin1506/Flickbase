@@ -10,6 +10,7 @@ import Home from './components/home/index';
 import Header from './components/navigation/header';
 import MainLayout from './hoc/mainLayout';
 import Auth from './components/auth';
+import Dashboard from './components/dashboard/index'
 
 const Routes = () => {
 
@@ -36,6 +37,7 @@ const Routes = () => {
         :
         <MainLayout>
           <Switch>
+            <Route path="/dashboard" component={Dashboard}/>
             <Route path="/auth" component={Auth}/>
             <Route path="/" component={Home}/>
           </Switch>
