@@ -1,7 +1,9 @@
-import * as users from './index'
-import axios from 'axios'
+import * as users from './index';
+import axios from 'axios';
 
-axios.defaults.headers.post['Content-Type'] = 'application/jsom'
+import { getAuthHeader } from '../../utils/tools'
+
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
 export const registerUser = (values) => {
@@ -16,11 +18,11 @@ export const registerUser = (values) => {
         } 
         catch(error){
             console.log(error.response.data.message)
-            dispatch(users.errorGlobal('Opps error registering user'))
+            dispatch(users.errorGlobal(error.response.data.message))
         }
     }
 }
-
+ 
 export const signinUser = (values) => {
     return async(dispatch)=> {
         try{
@@ -33,7 +35,19 @@ export const signinUser = (values) => {
         }
         catch(error){
             console.log(error.response.data.message)
-            dispatch(users.errorGlobal('Opps error signing in user'))
+            dispatch(users.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
+export const isAuthUser = () => {
+    return async(dispatch)=>{
+        try{
+            const user = await axios.get(`/api/users/isauth`,getAuthHeader);
+            dispatch(users.authUser({data: user.data, auth:true}))
+        } catch(error){
+            dispatch(users.authUser({data:{}, auth:false}))
+            console.log(error)
         }
     }
 }
