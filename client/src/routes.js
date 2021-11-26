@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route,BrowserRouter} from 'react-router-dom';  
 import GoogleFontLoader from 'react-google-font-loader';
+import Loader from './utils/loader.js'
 
 import { useDispatch,useSelector } from 'react-redux';
 import { isAuthUser } from './store/actions/users_actions'
@@ -31,7 +32,7 @@ const Routes = () => {
       <Header /> 
 
       {loading ?
-        <>Loading</>
+        <Loader />
         :
         <MainLayout>
           <Switch>
