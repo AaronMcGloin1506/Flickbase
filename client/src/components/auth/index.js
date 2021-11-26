@@ -6,6 +6,8 @@ import { useDispatch,useSelector } from 'react-redux';
 import { registerUser, signinUser } from '../../store/actions/users_actions'
 import { TextField, Button } from '@material-ui/core';
 
+import PreventAuthRoute from '../../hoc/preventAuthRoute';
+
 const Auth = (props) => {
 
     const [ register, setRegister ] = useState(false);
@@ -48,7 +50,7 @@ const Auth = (props) => {
     },[notifications,props.history])
 
     return (
-        <>
+        <PreventAuthRoute>
             <div className="auth_container">
                 <h1>Authenticate</h1>
                 <form className="mt-3" onSubmit={formik.handleSubmit}>
@@ -86,7 +88,7 @@ const Auth = (props) => {
                     </Button>
                 </form>
             </div>
-        </>
+        </PreventAuthRoute>
     )
 }
 

@@ -12,8 +12,9 @@ import Dashboard from '../dashboard';
 
 const Header = (props) => {
 
-    const [layout,setLayout] = useState('')
-    const notifications = useSelector(state=>state.notifications)
+    const [layout,setLayout] = useState('');
+    const notifications = useSelector(state=>state.notifications);
+    const users = useSelector(state=>state.users);
     const dispatch = useDispatch();
 
     const signOutUser = () => {
@@ -55,7 +56,7 @@ const Header = (props) => {
                 >
                     Flickbase
                 </Link>
-                <SideDrawer signOutUser={signOutUser}/>
+                <SideDrawer users={users} signOutUser={signOutUser}/>
             </nav>
         </>
     );
