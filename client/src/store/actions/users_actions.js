@@ -1,7 +1,7 @@
 import * as users from './index';
 import axios from 'axios';
 
-import { getAuthHeader } from '../../utils/tools'
+import { getAuthHeader, removeTokenCookie } from '../../utils/tools'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -48,6 +48,17 @@ export const isAuthUser = () => {
         } catch(error){
             dispatch(users.authUser({data:{}, auth:false}))
             console.log(error)
+        }
+    }
+}
+
+export const signOut = () => {
+    return async(dispatch)=>{
+        try{
+            removeTokenCookie();
+            dispatch(users.signOut())
+        } catch(error){
+
         }
     }
 }

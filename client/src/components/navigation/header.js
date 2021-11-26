@@ -4,13 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SideDrawer from './sideNavigation';
 import { showToast } from '../../utils/tools';
-import { clearNotifications } from '../../store/actions/index'
+import { clearNotifications } from '../../store/actions/index';
+import { signOut } from '../../store/actions/users_actions';
 
 
 const Header = (props) => {
 
     const notifications = useSelector(state=>state.notifications)
     const dispatch = useDispatch();
+
+    const signOutUser = () => {
+        dispatch(signOut())
+        props.history.push('/')
+    }
 
     // useEffect is listening to notification which is listening to state.notification for a change of state
     useEffect(()=>{
@@ -34,7 +40,7 @@ const Header = (props) => {
                 >
                     Flickbase
                 </Link>
-                <SideDrawer />
+                <SideDrawer signOutUser={signOutUser}/>
             </nav>
         </>
     );

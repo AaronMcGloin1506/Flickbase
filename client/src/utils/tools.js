@@ -23,5 +23,9 @@ export const getTokenCookie = () =>
 console.log(cookie.load('x-access-token'))};
 
 
-export const removeTokenCookie = () => cookie.remove('x-access-token');
+export const removeTokenCookie = () => {
+    cookie.remove('x-access-token');
+    console.log('cookie removed');
+}
+
 export const getAuthHeader = { headers: {'x-access-token': cookie.load('x-access-token') }};

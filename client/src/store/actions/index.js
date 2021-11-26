@@ -3,7 +3,8 @@ import {
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATION,
-    AUTH_USER
+    AUTH_USER,
+    SIGN_OUT
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -36,4 +37,8 @@ export const clearNotifications = () => {
 export const authUser = (user) => ({
     type: AUTH_USER,
     payload: user
+}) 
+
+export const signOut = () => ({
+    type: SIGN_OUT
 })
