@@ -19,13 +19,15 @@ export const showToast = (type,msg) => {
 }
 
 export const getTokenCookie = () => 
-{cookie.load('x-access-token') 
-console.log(cookie.load('x-access-token'))};
+{cookie.load('x-access-token')};
 
 
 export const removeTokenCookie = () => {
-    cookie.remove('x-access-token');
-    console.log('cookie removed');
+    cookie.remove('x-access-token',{path:'/'});
 }
 
-export const getAuthHeader = { headers: {'x-access-token': cookie.load('x-access-token') }};
+export const getAuthHeader = () =>{ 
+    return {
+        headers: {'x-access-token': cookie.load('x-access-token') }
+    }
+};
