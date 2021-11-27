@@ -11,9 +11,10 @@ import Header from './components/navigation/header';
 import MainLayout from './hoc/mainLayout';
 import AuthGuard from './hoc/authGuard'
 import Auth from './components/auth';
-import Dashboard from './components/dashboard/index'
-import Profile from './components/dashboard/profile'
-import Articles from './components/dashboard/articles'
+import Dashboard from './components/dashboard/index';
+import Profile from './components/dashboard/profile';
+import Articles from './components/dashboard/articles';
+import Article from './components/articles/article';
 
 
 const Routes = () => {
@@ -44,6 +45,7 @@ const Routes = () => {
             <Route path="/dashboard/articles" component={AuthGuard(Articles, true)}/>  
             <Route path="/dashboard/profile" component={AuthGuard(Profile)}/>
             <Route path="/dashboard" component={AuthGuard(Dashboard)}/>
+            <Route path="/article/:id" component={Article}/>
             <Route path="/auth" component={Auth}/>
             <Route path="/" component={Home}/>
           </Switch>

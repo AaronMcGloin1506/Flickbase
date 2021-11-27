@@ -5,7 +5,8 @@ import {
     CLEAR_NOTIFICATION,
     AUTH_USER,
     SIGN_OUT,
-    SITE_LAYOUT
+    SITE_LAYOUT,
+    GET_ARTICLE
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -14,6 +15,10 @@ export const getArticles = (articles) => ({
     payload: articles
 })
 
+export const getArticle = (article) => ({
+    type: GET_ARTICLE,
+    payload: article
+})
 
 ///////////// Notifications //////////////
 export const errorGlobal = (msg) => ({
