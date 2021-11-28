@@ -6,7 +6,8 @@ import {
     AUTH_USER,
     SIGN_OUT,
     SITE_LAYOUT,
-    GET_ARTICLE
+    GET_ARTICLE,
+    CLEAR_CURRENT_ARTICLE
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -18,6 +19,10 @@ export const getArticles = (articles) => ({
 export const getArticle = (article) => ({
     type: GET_ARTICLE,
     payload: article
+})
+
+export const clearCurrentArticle = () => ({
+    type: CLEAR_CURRENT_ARTICLE
 })
 
 ///////////// Notifications //////////////
@@ -54,3 +59,4 @@ export const appLayout = (layout) => ({
     type: SITE_LAYOUT,
     payload: layout
 })
+

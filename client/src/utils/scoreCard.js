@@ -52,7 +52,7 @@ const ScoreCard = ({current}) => {
                 <ListItemAvatar>
                     <Avatar><MovieIcon/></Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Director" secondary={current.director} className=""></ListItemText>
+                <ListItemText primary="Director" secondary={current.director} ></ListItemText>
             </ListItem>
             <Divider variant="inset" component="li" />
 
