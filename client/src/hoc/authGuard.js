@@ -1,37 +1,36 @@
-import { functions } from 'lodash';
-import { user } from 'osenv';
-import React, { useState, useEffect } from 'react';
+import React,{ useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
-export default function AuthGuard(ComposedComponent,roleCheck=false){
- const AuthenticationCheck = (props) => {
-     const [isAuth, setIsAuth] = useState(false);
-     const users = useSelector(state => state.users)
+export default function authguard(ComposedComponent,roleCheck=false){
+    const AuthenticationCheck = (props) => {
+        const [isAuth, setIsAuth ] = useState(false);
+        const users = useSelector( state => state.users )
 
-     useEffect(()=>{
-        if(!users.auth){
-            props.history.push('/')
-        }else{
-            if(roleCheck && users.data.role === 'user'){
-                props.history.push('/dashboard')
+
+        useEffect(()=>{
+            if(!users.auth){
+                props.history.push('/')
             } else {
-                setIsAuth(true)
+                if(roleCheck && users.data.role === 'user'){
+                    props.history.push('/dashboard')
+                } else{
+                    setIsAuth(true)
+                }
             }
-        }   
-     },[props,users])
+        },[props,users])
 
-     if(!isAuth){
-        return (
-            <div className="main_loader">
-                loading
-            </div>
-        )
-     }else{
-         return (
-            <ComposedComponent {...props}/>
-         )
-     }
- }
 
- return AuthenticationCheck;
+        if(!isAuth){
+            return(
+                <div className="main_loader">
+                    loading
+                </div>
+            )
+        } else{
+            return(
+                <ComposedComponent {...props}/>
+            )
+        }
+    }
+    return AuthenticationCheck;
 }
