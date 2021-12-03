@@ -22,6 +22,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 const AddArticle = (props) => {
 
+    const actorsValue = useRef('')
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: formValues,
@@ -76,6 +78,51 @@ const AddArticle = (props) => {
                         {...errorHelper(formik,'score')}
                         />
                 </div>
+
+                <FormikProvider value={formik}>
+                    <h5>Add the actors:</h5>
+                    <FieldArray
+                        name="actors"
+                        render={
+                            arrayhelpers => (
+                                <div>
+                                    <Paper className="actors_form">
+                                        <InputBase 
+                                            className="input"
+                                            placeholder="Add actor name here"
+                                            inputRef={actorsValue}
+                                            />
+                                            <IconButton
+                                                onClick={()=>{
+                                                    arrayhelpers.push(actorsValue.current.value)
+                                                    actorsValue.current.value = '';
+                                                }}
+                                            >
+                                                <AddIcon />
+                                            </IconButton>
+                                    </Paper>
+                                    { formik.errors.actors && formik.touched.actors ?
+                                        <FormHelperText error={true}>
+                                            {formik.errors.actors}
+                                        </FormHelperText>
+                                    :null}
+
+                                    <div className="chip_container">
+                                        { formik.values.actors.map((actor,index)=>(
+                                            <div key={index}>
+                                                <Chip 
+                                                    label={`${actor}`}
+                                                    color="primary"
+                                                    onDelete={()=> arrayhelpers.remove(index)}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+                            )
+                        }></FieldArray>
+                </FormikProvider>
 
                 <div className="form-group">
                     <TextField
