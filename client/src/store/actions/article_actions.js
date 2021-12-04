@@ -1,7 +1,22 @@
 import * as articles from './index'
 import axios from 'axios'
+import { getAuthHeader } from '../../utils/tools'
 
-axios.defaults.headers.post['Content-Type'] = 'application/jsom'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
+
+export const addArticle = (article) => {
+    return async(dispatch) => {
+        try{
+            const request = await axios.post('/api/articles/admin/add_articles',article, getAuthHeader());
+            dispatch(articles.addArticle(request.data))
+            dispatch(articles.successGlobal('Article successfully posted'))
+        }
+        catch(error){
+            dispatch(articles.errorGlobal(error.response.data.message))
+        }
+    }
+}
 
 export const getArticles = (sort) => {
     return async(dispatch,getState)=>{

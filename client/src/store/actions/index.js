@@ -7,10 +7,16 @@ import {
     SIGN_OUT,
     SITE_LAYOUT,
     GET_ARTICLE,
-    CLEAR_CURRENT_ARTICLE
+    CLEAR_CURRENT_ARTICLE,
+    ADD_ARTICLE
 } from '../types'
 
 //////////////// Articles ////////////////
+export const addArticle = (article) => ({
+    type: ADD_ARTICLE,
+    payload: article
+}) 
+
 export const getArticles = (articles) => ({
     type: GET_ARTICLES,
     payload: articles
@@ -60,3 +66,4 @@ export const appLayout = (layout) => ({
     payload: layout
 })
 
+ 
