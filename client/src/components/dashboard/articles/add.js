@@ -24,6 +24,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 const AddArticle = (props) => {
 
+    const [editorBlur, setEditorBlur] = useState(false);
+
     const actorsValue = useRef('')
 
     const formik = useFormik({
@@ -36,7 +38,12 @@ const AddArticle = (props) => {
     })
 
     const handleEditorState = (state) => {
-        console.log(state)
+        formik.setFieldValue('content',state, true)
+    }
+
+    const handleEditorBlur = (blur) => {
+        setEditorBlur(true)
+
     }
 
     const errorHelper = (formik, values) => ({
@@ -62,7 +69,23 @@ const AddArticle = (props) => {
                 <div className="form-group">
                     <WYSIWYG 
                         setEditorState={(state)=>handleEditorState(state)}
-                        />
+                        setEditorBlur={(blur)=>handleEditorBlur(blur)}
+                    />
+                    
+                    { formik.errors.content && editorBlur ?
+                        <FormHelperText error={true}>
+                            {formik.errors.content}
+                        </FormHelperText>
+                    :null }
+                    
+                    <TextField 
+                        type="hidden"
+                        name="content"
+                        {...formik.getFieldProps('content')}
+
+                    />
+
+                    
                 </div>
 
                 <div className="form-group">
