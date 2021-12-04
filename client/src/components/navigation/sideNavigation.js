@@ -16,7 +16,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { user } from 'osenv';
 
 
 const SideDrawer = ({users,signOutUser}) => {

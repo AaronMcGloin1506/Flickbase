@@ -7,27 +7,19 @@ export const showToast = (type,msg) => {
             toast.success(msg,{
                 position: toast.POSITION.BOTTOM_RIGHT
             })
-            break;
+        break;
         case 'ERROR':
             toast.error(msg,{
                 position: toast.POSITION.BOTTOM_RIGHT
             })
-            break;
+        break;
         default:
-            return false;
+            return false
     }
 }
 
-export const getTokenCookie = () => 
-{cookie.load('x-access-token')};
-
-
-export const removeTokenCookie = () => {
-    cookie.remove('x-access-token',{path:'/'});
+export const getTokenCookie = () => cookie.load('x-access-token');
+export const removeTokenCookie = () => cookie.remove('x-access-token', {path:'/'});
+export const getAuthHeader = () => {
+    return { headers: { 'x-access-token':getTokenCookie() }}
 }
-
-export const getAuthHeader = () =>{ 
-    return {
-        headers: {'x-access-token': cookie.load('x-access-token') }
-    }
-};
