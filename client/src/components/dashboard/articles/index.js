@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../hoc/adminLayout';
 import { getPaginateArticles } from '../../../store/actions/article_actions'
 import PaginationComponent from './paginate';
@@ -13,22 +13,29 @@ import {
     FormControl
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { props } from 'bluebird';
 
 const Articles = (props) => {
 
     const articles = useSelector(state=>state.articles)
     const dispatch = useDispatch();
-
+    const [removeAlert, setRemoveAlert] = useState(false);
+    const [toRemove, setToRemove] = useState(null)
     let arts = articles.adminArticles;
 
     const editArtsAction = (id) => {
         props.history.push(`/dashboard/articles/edit/${id}`)
     }
-    
-    useEffect(()=>{
-        dispatch(getPaginateArticles())
-    },[dispatch])
+
+    const handleClose = () => { setRemoveAlert(false)}
+    const handleShow = (id=null) => {
+        setRemoveAlert(true)
+        setToRemove(id)
+
+    }
+
+    const handleDelete = () => {
+        console.log(toRemove)
+    }
 
     const handleStatusChange = (status,id) => {
         let newStatus = status === 'draft' ? 'public' : 'draft'
@@ -42,6 +49,10 @@ const Articles = (props) => {
     const goToNextPage = (page) => {
         dispatch(getPaginateArticles(page))
     }
+
+    useEffect(()=>{
+        dispatch(getPaginateArticles())
+    },[dispatch])
 
     return (
         <AdminLayout section="Articles">
@@ -69,10 +80,27 @@ const Articles = (props) => {
                     arts={arts}
                     prev={(page)=>goToPrevPage(page)} 
                     next={(page)=>goToNextPage(page)} 
+                    handleShow={(id)=>handleShow(id)}
                     handleStatusChange={(status,id)=>handleStatusChange(status,id)}
                     editArtsAction={(id)=> editArtsAction(id)}  
                 />
 
+                <Modal show={removeAlert} onHide={()=> handleClose()}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Are you really sure ?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        There is no going back you know
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={()=>handleClose()}>Opps, close this</Button>
+                        <Button
+                            variant="danger"
+                            onClick={()=>handleDelete()}
+                        >
+                            Delete Article</Button>
+                    </Modal.Footer>
+                </Modal>
 
             </div>
         </AdminLayout>
