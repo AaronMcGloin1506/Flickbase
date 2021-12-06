@@ -22,8 +22,15 @@ const Articles = () => {
     
     useEffect(()=>{
         dispatch(getPaginateArticles())
-        
     },[dispatch])
+
+    const goToPrevPage = (page) => {
+        dispatch(getPaginateArticles(page))
+    }
+
+    const goToNextPage = (page) => {
+        dispatch(getPaginateArticles(page))
+    }
 
     return (
         <AdminLayout section="Articles">
@@ -47,7 +54,11 @@ const Articles = () => {
                     </form>
                 </ButtonToolbar>
 
-                <PaginationComponent arts={arts}/>
+                <PaginationComponent 
+                    arts={arts}
+                    prev={(page)=>goToPrevPage(page)} 
+                    next={(page)=>goToNextPage(page)}   
+                />
 
 
             </div>

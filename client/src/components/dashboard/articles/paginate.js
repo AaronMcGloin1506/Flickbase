@@ -5,7 +5,15 @@ import Loader from '../../../utils/loader';
 
 
 
-const PaginationComponent = ({arts}) => {
+const PaginationComponent = ({arts, prev, next}) => {
+
+    const goToPrevPage = (page) => {
+        prev(page)
+    }
+
+    const goToNextPage = (page) => {
+        next(page)
+    }
 
     return(
         <>  
@@ -32,8 +40,8 @@ const PaginationComponent = ({arts}) => {
                     <Pagination>
                         {arts.hasPrevPage ?
                             <>
-                                <Pagination.Prev onClick={()=> alert('Previous')}/>
-                                <Pagination.Item onClick={()=> alert('Previous 2')}>{arts.prevPage}</Pagination.Item>
+                                <Pagination.Prev onClick={()=> goToPrevPage(arts.prevPage)}/>
+                                <Pagination.Item onClick={()=> goToPrevPage(arts.prevPage)}>{arts.prevPage}</Pagination.Item>
                             </>
                         :null}
                         
@@ -41,8 +49,8 @@ const PaginationComponent = ({arts}) => {
 
                         {arts.hasNextPage ?
                             <>
-                                <Pagination.Item onClick={()=> alert('Next 1')}>{arts.nextPage}</Pagination.Item>
-                                <Pagination.Next onClick={()=> alert('Next 2')}/>
+                                <Pagination.Item onClick={()=> goToNextPage(arts.nextPage)}>{arts.nextPage}</Pagination.Item>
+                                <Pagination.Next onClick={()=> goToNextPage(arts.nextPage)}/>
                             </>
                         :null}
                     </Pagination>
