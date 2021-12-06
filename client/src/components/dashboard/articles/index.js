@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../hoc/adminLayout';
-import { getPaginateArticles } from '../../../store/actions/article_actions'
+import { getPaginateArticles, removeArticle } from '../../../store/actions/article_actions'
 import PaginationComponent from './paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeStatusArticle } from '../../../store/actions/article_actions'
@@ -17,6 +17,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Articles = (props) => {
 
     const articles = useSelector(state=>state.articles)
+    const notifications = useSelector(state=>state.notifications)
     const dispatch = useDispatch();
     const [removeAlert, setRemoveAlert] = useState(false);
     const [toRemove, setToRemove] = useState(null)
@@ -30,11 +31,10 @@ const Articles = (props) => {
     const handleShow = (id=null) => {
         setRemoveAlert(true)
         setToRemove(id)
-
     }
 
     const handleDelete = () => {
-        console.log(toRemove)
+        dispatch(removeArticle(toRemove))
     }
 
     const handleStatusChange = (status,id) => {
@@ -53,6 +53,13 @@ const Articles = (props) => {
     useEffect(()=>{
         dispatch(getPaginateArticles())
     },[dispatch])
+
+    useEffect(()=>{
+        handleClose();
+        if(notifications && notifications.removeArticle){
+            dispatch(getPaginateArticles(arts.page))
+        }
+    },[dispatch, notifications, arts])
 
     return (
         <AdminLayout section="Articles">

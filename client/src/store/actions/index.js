@@ -10,7 +10,8 @@ import {
     CLEAR_CURRENT_ARTICLE,
     ADD_ARTICLE,
     GET_ADMIN_ARTICLES,
-    UPDATE_ARTICLE_STATUS
+    UPDATE_ARTICLE_STATUS,
+    REMOVE_ARTICLE
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -61,6 +62,10 @@ export const clearNotifications = () => {
         })
     }
 }
+
+export const removeArticle = () => ({
+    type: REMOVE_ARTICLE
+})
 
 ///////////// Auth //////////////
 export const authUser = (user) => ({

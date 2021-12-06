@@ -62,7 +62,7 @@ export const getPaginateArticles = (page=1,limit=5) => {
 }
 
 export const changeStatusArticle = (status,_id) => {
-    return  async(dispatch, getState)=>{
+    return async(dispatch, getState)=>{
         try{
             const article = await axios.patch(`/api/articles/admin/${_id}`,{
                 status
@@ -80,4 +80,16 @@ export const changeStatusArticle = (status,_id) => {
             dispatch(articles.errorGlobal(error.response.data.message))
         }
     }
+}
+
+export const removeArticle = (id) => {
+    return async(dispatch)=>{
+        try{
+            await axios.delete(`/api/articles/admin/${id}`,getAuthHeader());
+            dispatch(articles.removeArticle());
+            dispatch(articles.successGlobal('Article deleted !!!!'));
+        } catch(error){
+            dispatch(articles.errorGlobal(error.response.data.message))
+        }
+    } 
 }
