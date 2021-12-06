@@ -47,7 +47,7 @@ const Routes = () => {
             <Route path="/dashboard/articles/edit/:id" component={AuthGuard(EditArticle, true)}/>  
             <Route path="/dashboard/articles/add" component={AuthGuard(AddArticle, true)}/>  
             <Route path="/dashboard/articles" component={AuthGuard(Articles, true)}/>  
-            <Route path="/dashboard/profile" component={AuthGuard(Profile)}/>
+            <Route path="/dashboard/profile" component={AuthGuard(Profile, true)}/>
             <Route path="/dashboard" component={AuthGuard(Dashboard)}/>
             <Route path="/article/:id" component={Article}/>
             <Route path="/auth" component={Auth}/>
