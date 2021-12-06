@@ -54,7 +54,7 @@ export const successGlobal = (msg) => ({
     type: SUCCESS_GLOBAL,
     payload: msg
 })
-
+ 
 export const clearNotifications = () => {
     return (dispatch) => {
         dispatch({
