@@ -5,7 +5,7 @@ import Loader from '../../../utils/loader';
 
 
 
-const PaginationComponent = ({arts, prev, next}) => {
+const PaginationComponent = ({arts,prev,next,handleStatusChange,editArtsAction}) => {
 
     const goToPrevPage = (page) => {
         prev(page)
@@ -33,6 +33,21 @@ const PaginationComponent = ({arts, prev, next}) => {
                                     <td><Moment to={item.date}></Moment></td>
                                     <td>{item.title}</td>
                                     <td>{item.score}</td>
+                                    <td className="action_btn remove_btn"
+                                        onClick={()=> alert(item._id)}
+                                    >
+                                        Remove
+                                    </td>
+                                    <td className="action_btn edit_btn"
+                                        onClick={()=> editArtsAction(item._id)}
+                                    >
+                                        Edit
+                                    </td>
+                                    <td className="action_btn status_btn"
+                                        onClick={()=> handleStatusChange(item.status,item._id)}
+                                    >
+                                        {item.status}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

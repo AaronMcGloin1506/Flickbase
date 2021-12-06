@@ -60,3 +60,24 @@ export const getPaginateArticles = (page=1,limit=5) => {
         }
     }
 }
+
+export const changeStatusArticle = (status,_id) => {
+    return  async(dispatch, getState)=>{
+        try{
+            const article = await axios.patch(`/api/articles/admin/${_id}`,{
+                status
+            },getAuthHeader())
+
+            let art = article.data;
+            let state = getState().articles.adminArticles.docs; /// previous state
+            let position = state.findIndex( art => art._id === _id); // find the position 
+            state[position] = art; // updating the state 
+
+            dispatch(articles.updateArticleStatus(state));
+            dispatch(articles.successGlobal('Status changed'))
+
+        } catch(error){
+            dispatch(articles.errorGlobal(error.response.data.message))
+        }
+    }
+}

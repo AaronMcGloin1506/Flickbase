@@ -3,6 +3,7 @@ import AdminLayout from '../../../hoc/adminLayout';
 import { getPaginateArticles } from '../../../store/actions/article_actions'
 import PaginationComponent from './paginate';
 import { useDispatch, useSelector } from 'react-redux';
+import { changeStatusArticle } from '../../../store/actions/article_actions'
 import {
     Modal,
     Button,
@@ -12,17 +13,27 @@ import {
     FormControl
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { props } from 'bluebird';
 
-const Articles = () => {
+const Articles = (props) => {
 
     const articles = useSelector(state=>state.articles)
     const dispatch = useDispatch();
 
     let arts = articles.adminArticles;
+
+    const editArtsAction = (id) => {
+        props.history.push(`/dashboard/articles/edit/${id}`)
+    }
     
     useEffect(()=>{
         dispatch(getPaginateArticles())
     },[dispatch])
+
+    const handleStatusChange = (status,id) => {
+        let newStatus = status === 'draft' ? 'public' : 'draft'
+        dispatch(changeStatusArticle(newStatus,id))
+    }
 
     const goToPrevPage = (page) => {
         dispatch(getPaginateArticles(page))
@@ -34,7 +45,7 @@ const Articles = () => {
 
     return (
         <AdminLayout section="Articles">
-            <div className="articles-table">
+            <div className="articles_table">
                 <ButtonToolbar className="mb-3">
                     <ButtonGroup className="mr-2">
                         <LinkContainer to="/dashboard/articles/add">
@@ -57,7 +68,9 @@ const Articles = () => {
                 <PaginationComponent 
                     arts={arts}
                     prev={(page)=>goToPrevPage(page)} 
-                    next={(page)=>goToNextPage(page)}   
+                    next={(page)=>goToNextPage(page)} 
+                    handleStatusChange={(status,id)=>handleStatusChange(status,id)}
+                    editArtsAction={(id)=> editArtsAction(id)}  
                 />
 
 
