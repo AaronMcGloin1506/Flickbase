@@ -82,13 +82,13 @@ router.route('/admin/paginate')
         // ]);
 
         const limit = req.body.limit ? req.body.limit : 5;
-        //const aggQuery = Article.aggregate();
+        const aggQuery = Article.aggregate();
         const options = {
             page: req.body.page,
             limit,
             sort: {_id:"desc"}
         }
-        const articles = await Article.aggregatePaginate(aggregateQuery,options);
+        const articles = await Article.aggregatePaginate(aggQuery,options);
         res.status(200).json(articles)
         
     } catch(error){

@@ -49,3 +49,14 @@ export const getArticle = (id) => {
         }
     }
 }
+
+export const getPaginateArticles = (page=1,limit=5) => {
+    return async(dispatch)=> {
+        try{
+            const request = await axios.post(`/api/articles/admin/paginate`,{page,limit},getAuthHeader());
+            dispatch(articles.getPaginateArticles(request.data))
+        } catch(error) {
+            dispatch(articles.errorGlobal(error.response.data.message))
+        }
+    }
+}

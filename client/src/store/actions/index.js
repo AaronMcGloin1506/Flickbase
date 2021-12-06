@@ -8,7 +8,8 @@ import {
     SITE_LAYOUT,
     GET_ARTICLE,
     CLEAR_CURRENT_ARTICLE,
-    ADD_ARTICLE
+    ADD_ARTICLE,
+    GET_ADMIN_ARTICLES
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -25,6 +26,11 @@ export const getArticles = (articles) => ({
 export const getArticle = (article) => ({
     type: GET_ARTICLE,
     payload: article
+})
+
+export const getPaginateArticles = (articles) => ({
+    type: GET_ADMIN_ARTICLES,
+    payload: articles
 })
 
 export const clearCurrentArticle = () => ({
