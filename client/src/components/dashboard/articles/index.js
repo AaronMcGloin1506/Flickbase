@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import AdminLayout from '../../../hoc/adminLayout';
 import { getPaginateArticles } from '../../../store/actions/article_actions'
+import PaginationComponent from './paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Modal,
@@ -14,7 +15,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const Articles = () => {
 
+    const articles = useSelector(state=>state.articles)
     const dispatch = useDispatch();
+
+    let arts = articles.adminArticles;
     
     useEffect(()=>{
         dispatch(getPaginateArticles())
@@ -43,7 +47,7 @@ const Articles = () => {
                     </form>
                 </ButtonToolbar>
 
-
+                <PaginationComponent arts={arts}/>
 
 
             </div>
