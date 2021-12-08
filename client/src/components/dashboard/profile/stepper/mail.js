@@ -116,7 +116,8 @@ const EmailStepper = ({users}) => {
                 { activeStep === 2 ?
                     <div className="form-group">
                         <Button className="mt-3" variant="contained" color="primary" onClick={formik.submitForm}>
-                            Yes change the email</Button>
+                            Yes change the email
+                        </Button>
                         {prevBtn()}
                     </div>
                 :null}

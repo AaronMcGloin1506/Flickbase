@@ -81,3 +81,24 @@ export const changeEmail = (data) => {
         }
     }
 }
+
+
+
+export const updateUserProfile = (data) => {
+    return async(dispatch, getState)=>{
+        try{
+            const profile = await axios.patch(`/api/users/profile`,data, getAuthHeader());
+
+            const useData = {
+                ...getState().users.data,
+                ...profile.data
+            }
+
+            dispatch(users.updateUserProfile(useData))
+            dispatch(users.successGlobal('Profile Updated'))
+
+        } catch(error){
+            dispatch(users.errorGlobal(error.response.data.message))
+        }
+    }
+}
