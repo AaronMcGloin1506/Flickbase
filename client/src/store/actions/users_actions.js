@@ -1,6 +1,6 @@
 import * as users from './index';
 import axios from 'axios';
-
+ 
 import { getAuthHeader, removeTokenCookie, getTokenCookie } from '../../utils/tools'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -61,6 +61,23 @@ export const signOut = () => {
             dispatch(users.signOut())
         } catch(error){
 
+        }
+    }
+}
+
+export const changeEmail = (data) => {
+    return async(dispatch)=>{
+        try{
+            await axios.patch(`/api/users/update_email`,{
+                email:data.email,
+                newemail:data.newEmail
+            },getAuthHeader())
+
+            dispatch(users.changeUserEmail(data.newEmail))
+            dispatch(users.successGlobal('Email updated'))
+            
+        }catch(error){
+            dispatch(users.errorGlobal(error.response.data.message))
         }
     }
 }

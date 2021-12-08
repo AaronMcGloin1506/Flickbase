@@ -11,7 +11,8 @@ import {
     ADD_ARTICLE,
     GET_ADMIN_ARTICLES,
     UPDATE_ARTICLE_STATUS,
-    REMOVE_ARTICLE
+    REMOVE_ARTICLE, 
+    CHANGE_USER_EMAIL
 } from '../types'
 
 //////////////// Articles ////////////////
@@ -37,7 +38,7 @@ export const getPaginateArticles = (articles) => ({
 
 export const clearCurrentArticle = () => ({
     type: CLEAR_CURRENT_ARTICLE
-})
+}) 
 
 export const updateArticleStatus = (articles) => ({
     type: UPDATE_ARTICLE_STATUS,
@@ -75,6 +76,11 @@ export const authUser = (user) => ({
 
 export const signOut = () => ({
     type: SIGN_OUT
+})
+
+export const changeUserEmail = (data) => ({
+    type: CHANGE_USER_EMAIL,
+    payload: data
 })
 
 ///////////// site //////////////
